@@ -5,5 +5,7 @@ counts: output sum[string] of int;
 visit(p, visitor {
 	before n: Project -> ;
 	before node: CodeRepository -> ;
-	before node: Revision -> if (isfixingrevision(node.log)) counts[p.name] << 1;
+	before node: Revision -> 
+		if (isfixingrevision(node.log)) 
+			counts[p.name] << 1;
 });
