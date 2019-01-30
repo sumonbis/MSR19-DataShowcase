@@ -2,9 +2,14 @@
 
 p: Project = input;
 #topimport: output top(10) of string weight int;
-lib: output collection [string] of string;
-#lib: output set[string] of string; 
-ml := {"theano", "pytroch", "pycaffe", "keras", "tensorflow", "sklearn"};
+lib: output set [string] of string;
+
+#ml := {"theano", "pytroch", "pycaffe", "keras", "tensorflow", "sklearn"};
+ml := {"theano", "pytroch", "caffe", "keras", "tensorflow", "sklearn",
+	   "xgboost", "cntk", "statsmodels", "lightgbm", "catboost", "pybrain", 
+	   "lightning", "eli5", "scrapy", "spacy", "gensim", "pylearn2",
+	   "nupic", "pattern", "imblearn", "pyenv"};
+
 isMl := false;
 
 visit(p, visitor {
