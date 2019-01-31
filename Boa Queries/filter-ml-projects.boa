@@ -4,10 +4,13 @@ p: Project = input;
 #topimport: output top(10) of string weight int;
 lib: output set [string] of string;
 
-#ml := {"theano", "pytroch", "pycaffe", "keras", "tensorflow", "sklearn"};
+#ml := {"theano", "pytorch", "pycaffe", "keras", "tensorflow", "sklearn"};
 ml := {"theano", "pytroch", "caffe", "keras", "tensorflow", "sklearn",
-	   "xgboost", "cntk", "statsmodels", "lightgbm", "catboost", "pybrain", 
-	   "lightning", "eli5", "scrapy", "spacy", "gensim", "pylearn2",
+	   "numpy", "scipy", "pandas", "statsmodels",
+	   "matplotlib", "seaborn", "plotly", "bokeh", "pydot",
+	   "xgboost", "catboost", "lightgbm", "eli5",
+	   "elephas", "spark", "nltk", "cntk", "scrapy", "gensim",
+	   "pybrain", "lightning", "spacy", , "pylearn2",
 	   "nupic", "pattern", "imblearn", "pyenv"};
 
 isMl := false;
@@ -33,3 +36,24 @@ visit(p, visitor {
 	    }
     }
 });
+
+
+Deep Learning
+
+	13. TensorFlow (Commits: 33339, Contributors: 1469)
+	14. PyTorch (Commits: 11306, Contributors: 635)
+	15. Keras (Commits: 4539, Contributors: 671)
+
+Distributed Deep Learning
+
+	16. Dist-keras / elephas / spark-deep-learning (Commits: 1125 / 170 / 67, Contributors: 5 / 13 / 11)
+
+Natural Language Processing
+
+	17. NLTK (Commits: 13041, Contributors: 236)
+	18. SpaCy (Commits: 8623, Contributors: 215)
+	19. Gensim (Commits: 3603, Contributors: 273)
+
+Data Scraping
+	
+	20. Scrapy (Commits: 6625, Contributors: 281)

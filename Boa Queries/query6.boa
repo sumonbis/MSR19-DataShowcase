@@ -1,18 +1,8 @@
-# what are the 5 most popular databases?
+# count how many valid Python files are in the latest snapshot
 p: Project = input;
-counts: output top(5) of string weight int;
+counts: output sum of int;
 
-foreach (i: int; def(p.databases[i]))
-	counts << p.databases[i] weight 1;
-
-
-
-# Counting the number of active Python projects
-#p: Project = input;
-#counts: output sum of int;
-#
-#visit(p, visitor {
-#	before node: CodeRepository ->
-#		exists (i: int; yearof(node.getrevisions(i).commit_date) == 2018)
-#			counts << 1;
-#});
+visit(p, visitor {
+	before node: CodeRepository ->
+		counts << len(getsnapshot(node, "SOURCE_PY_3"));
+});
