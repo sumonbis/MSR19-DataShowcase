@@ -15,7 +15,6 @@ visit(p, visitor {
 	before node: Namespace -> {
 	    foreach (i: int; def(node.imports[i])) {
 	        import := node.imports[i];
-	        if(!match(`from(.*?)import.*`, import))
 	            topimport << string(import) weight 1;
 	    }
     }
