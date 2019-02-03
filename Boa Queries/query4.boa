@@ -2,7 +2,7 @@
 
 p: Project = input;
 
-topimport: output top(10) of string weight int;
+topimport: output top(50) of string weight int;
 
 visit(p, visitor {
 	# only look at the latest snapshot
