@@ -1,0 +1,48 @@
+p: Project = input;
+a_countProject: output sum of int;
+b_countRevision: output sum of int;
+c_countPyRevision: output sum of int;
+d_countFixingRevision: output sum of int;
+e_words: output top(5000) of string weight int;
+index: int;
+
+visit(p, visitor {
+	before cr: CodeRepository -> {
+	    a_countProject << 1;
+		for(i := 0; i < getrevisionscount(cr); i++) {
+		    index = i;
+		    visit(getrevision(cr, i));
+		}
+	    stop;
+	}
+	before r: Revision -> {
+	    b_countRevision << 1;
+	    clean_log := ""; 
+	    isPyCommit := false;
+		
+		######### Checking Python commit or not ########
+		foreach(f: int; def(r.files[f])) {
+			if (match(".*\\.py", r.files[f].name)) {
+				isPyCommit = true; continue;
+			}
+    	}
+		if (!isPyCommit) {
+			clean_log = "Commit witout a Java file";
+    	    stop;
+		}
+		##############################################
+		c_countPyRevision << 1;
+		if(isfixingrevision(r)) {
+		    d_countFixingRevision << 1;
+    		log := lowercase(trim(r.log));
+    		words := splitall(log, "\\W+");
+    		foreach(j: int; words[j]) {
+    			if (len(words[j]) < 3 || len(words[j]) > 30) ;
+    			else {
+    				e_words << words[j] weight 1;
+    			}
+    		}
+		}
+		stop;
+	}
+});
