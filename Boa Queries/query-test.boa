@@ -1,0 +1,49 @@
+# Count the most used libraries in the dataset
+
+p: Project = input;
+
+#proj: output collection[string] of string;
+proj: output top(100) of string weight int;
+
+file := "";
+method1 := "";
+method2 := "";
+method3 := "";
+method4 := "";
+
+visit(p, visitor {	
+	before n: CodeRepository -> {
+		snapshot := getsnapshot(n);
+		foreach (i: int; def(snapshot[i]))
+			visit(snapshot[i]);
+		stop;
+	}
+	
+	before node: Namespace -> {
+		method1 = "";
+		method2 = "";
+		method3 = "";
+		method4 = "";
+    }
+	
+	before ex: Expression -> {
+		if (ex.kind == ExpressionKind.METHODCALL) {
+			sig := ex.method;
+#			sig := ex.method + "(";
+#			foreach (i: int; def(ex.method_args[i])) {
+#				sig += ex.method_args[i].variable + ", ";
+#			}
+#			sig += ")";
+		
+#		method1 = method2; method2 = method3; method3 = method4; method4 = sig;
+#		patt := method1 + ", " + method2 + ", " + method3 + ", " + method4;
+#		if(method1 == method2 && method1 == method3)
+#			;
+#		else
+			#proj << patt weight 1;
+		proj << sig weight 1; 
+		}	
+	}
+});
+	
+
