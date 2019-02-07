@@ -1,11 +1,7 @@
-
 p: Project = input;
 
-#proj: output collection[string] of string;
-proj: output top(100) of string weight int;
-
-file := "";
-method1 := ""; method2 := ""; method3 := ""; method4 := "";
+proj: output top(5000) of string weight int;
+methods : array of string;
 
 visit(p, visitor {	
 	before n: CodeRepository -> {
@@ -16,24 +12,27 @@ visit(p, visitor {
 	}
 	
 	before node: Namespace -> {
-		method1 = ""; method2 = ""; method3 = ""; method4 = "";
+		methods = new(methods, 5, "");
     }
 	
 	before ex: Expression -> {
 		if (ex.kind == ExpressionKind.METHODCALL) {
-			sig := ex.method;
-			
-#			foreach (i: int; def(ex.method_args[i])) {
-#				sig += ex.method_args[i].variable + ", ";
-#			}
-#			sig += ")";
+			sig := ex.method;	
+		#foreach (i: int; def(ex.method_args[i])) sig += ex.method_args[i].variable + ", ";
 		
-		method1 = method2; method2 = method3; method3 = method4; method4 = sig;
-		patt := method1 + ", " + method2 + ", " + method3 + ", " + method4;
-		if(method1 == method2 && method1 == method3)
-			;
-		else
-			proj << patt weight 1;
+		for(i := 0; i < len(methods) ; i++) {
+			if(i == len(methods) - 1) 
+				methods[i] = sig;
+			else 
+				methods[i] = methods[i+1];
+		}
+		patt := "";
+		if(methods[0] == methods[1] && methods[1] == methods[2]) ;
+		else {
+			foreach(i : int; def(methods[i]))
+			patt += methods[i] + ", " ;
+		}
+		proj << patt weight 1;
 		#proj << sig weight 1; 
 		}	
 	}

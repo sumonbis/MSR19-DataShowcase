@@ -3,5 +3,8 @@ p: Project = input;
 counts: output mean[string] of int;
 
 visit(p, visitor {
-	before node: Revision -> counts[p.name] << len(node.files);
+	before node: Revision -> {
+		counts[p.name] << len(node.files);
+		stop;
+	}
 });

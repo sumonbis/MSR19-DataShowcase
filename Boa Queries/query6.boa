@@ -3,6 +3,8 @@ p: Project = input;
 counts: output sum of int;
 
 visit(p, visitor {
-	before node: CodeRepository ->
+	before node: CodeRepository -> {
 		counts << len(getsnapshot(node, "SOURCE_PY_3"));
+		stop;
+	}
 });

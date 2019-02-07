@@ -4,6 +4,8 @@ counts: output sum[string] of int;
 
 visit(p, visitor {
 	before node: CodeRepository -> ;
-	before node: Revision -> 
+	before node: Revision -> {
 		counts["Revisions"] << 1;
+		stop;
+	}
 });

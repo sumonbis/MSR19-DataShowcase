@@ -1,4 +1,4 @@
-# What are the 5 largest projects, in terms of AST nodes?
+# What are the 10 largest projects, in terms of AST nodes?
 # Output is in number of AST nodes.
 p: Project = input;
 top: output top(10) of string weight int;

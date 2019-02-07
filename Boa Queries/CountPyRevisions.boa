@@ -4,10 +4,8 @@ countPyRevision: output sum of int;
 visit(p, visitor {
 	before cr: CodeRepository -> {
 		for(i := 0; i < getrevisionscount(cr); i++) {
-		    index = i;
 		    visit(getrevision(cr, i));
 		}
-	    stop;
 	}
 	before r: Revision -> {
 		foreach(f: int; def(r.files[f])) {

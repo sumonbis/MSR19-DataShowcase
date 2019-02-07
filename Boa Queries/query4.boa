@@ -2,7 +2,7 @@
 
 p: Project = input;
 
-topimport: output top(50) of string weight int;
+topimport: output top(20) of string weight int;
 
 visit(p, visitor {
 	# only look at the latest snapshot
@@ -10,12 +10,12 @@ visit(p, visitor {
 		snapshot := getsnapshot(n);
 		foreach (i: int; def(snapshot[i]))
 			visit(snapshot[i]);
-		stop;
 	}
 	before node: Namespace -> {
 	    foreach (i: int; def(node.imports[i])) {
 	        import := node.imports[i];
-	            topimport << string(import) weight 1;
+	        topimport << string(import) weight 1;
 	    }
+	    stop;
     }
 });
