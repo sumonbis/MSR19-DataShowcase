@@ -3,6 +3,6 @@ The popularity of Python programming language has surged in recent years due to 
 
 The data generation compiled code is available here: https://github.com/sumonbis/MSR19-DataShowcase/releases/tag/v1.1
 
-For running the above data generation program follow instruction: 
+For running the above data generation program follow the instruction: https://github.com/sumonbis/MSR19-DataShowcase/blob/master/instruction.txt
 
 The open source code for Github repository collection, data generation and Boa compiler are available in the pydatagen branch of Boa compiler: https://github.com/boalang/compiler/tree/pydatagen
