@@ -1,0 +1,49 @@
+p: Project = input;
+
+proj: output top(500) of string weight int;
+methods : array of string;
+m := {"Sequential", "Dense", "Activation", "Conv2d", "BatchNorm2d",
+      "ReLU", "Dropout", "Sigmoid", "Linear", "Flatten", "Reshape",
+      "MaxPooling2D", "predict", "PReLU"};
+
+visit(p, visitor {	
+	before n: CodeRepository -> {
+		snapshot := getsnapshot(n);
+		foreach (i: int; def(snapshot[i]))
+			visit(snapshot[i]);
+		stop;
+	}
+	
+	before node: Namespace -> {
+		methods = new(methods, 8, "");
+    }
+	
+	before ex: Expression -> {
+	    isML := false;
+		if (ex.kind == ExpressionKind.METHODCALL) {
+    		sig := ex.method;
+    		
+    		for(i := 0; i < len(methods) ; i++) {
+    			if(i == len(methods) - 1) 
+    				methods[i] = sig;
+    			else 
+    				methods[i] = methods[i+1];
+    		}
+    		patt := "";
+    		if(methods[0] == methods[1] && methods[1] == methods[2]) ;
+    		else {
+    			foreach(i : int; def(methods[i]))
+    			    patt += methods[i] + ", " ;
+    		}
+    		foreach(i : int; def(methods[i])) {
+    		    exists (j: int; m[j] == methods[i]) {
+		            isML = true;
+		        }
+		        if(isML) 
+		            break;
+    		}
+    		if(isML)
+    		    proj << patt weight 1;
+		}	
+	}
+});
