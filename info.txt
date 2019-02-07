@@ -1,0 +1,23 @@
+Information about the dataset generation:
+
+The 33 machine learning and data sceince libraries that used for filtering:
+
+   {"theano", "pytroch", "caffe", "keras", "tensorflow", "sklearn",
+   "numpy", "scipy", "pandas", "statsmodels",
+   "matplotlib", "seaborn", "plotly", "bokeh", "pydot",
+   "xgboost", "catboost", "lightgbm", "eli5",
+   "elephas", "spark", "nltk", "cntk", "scrapy", "gensim",
+   "pybrain", "lightning", "spacy", "pylearn2",
+   "nupic", "pattern", "imblearn", "pyenv"}
+
+
+
+The data science related keywords that have been used to filter data seience repository:
+
+	{"machine learn", "machine-learn", "data sci", "data-sci", "big data", 
+	"big-data", "large data", "large-data", "data analy", 
+	"data-analy", "deep learn", "deep-learn", "data model", "data-model", 
+	"artificial intel", "artificial-intel", "mining", "topic modelling", "topic-modelling", 
+	"natural language pro", "natural-language-pro", "nlp", "data frame", "data proces", 
+	" ml ", "tensorflow", "tensor flow", "tensor-flow", "theano", "caffe", "keras", 
+	"scikit-learn", "kaggle", "spark", "hadoop", "mapreduce", "hdfs", "neural net", "neural-net"}
