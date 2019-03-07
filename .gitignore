@@ -3,7 +3,6 @@
 *.blg
 *.synctex.gz
 *.out
-paper.pdf
 *.log
 *.gz=
 .DS_Store
