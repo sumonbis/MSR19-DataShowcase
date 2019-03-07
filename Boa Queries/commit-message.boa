@@ -20,7 +20,7 @@ visit(p, visitor {
 	before r: Revision -> {
 	    clean_log := "";
 	    isJavaCommit := false;		
-		######### Checking Java commit or not ########
+		######### Checking Python commit or not ########
 		foreach(f: int; def(r.files[f])) {
 			if (match(".*\\.py", r.files[f].name)) {
 				isJavaCommit = true;
