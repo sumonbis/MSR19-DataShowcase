@@ -1,7 +1,8 @@
 p: Project = input;
 
-proj: output top(500) of string weight int;
+proj: output top(50) of string weight int;
 methods : array of string;
+patt_len := 7;
 m := {"Sequential", "Dense", "Activation", "Conv2d", "BatchNorm2d",
       "ReLU", "Dropout", "Sigmoid", "Linear", "Flatten", "Reshape",
       "MaxPooling2D", "predict", "PReLU"};
@@ -15,35 +16,31 @@ visit(p, visitor {
 	}
 	
 	before node: Namespace -> {
-		methods = new(methods, 8, "");
+		methods = new(methods, patt_len, "");
     }
 	
 	before ex: Expression -> {
 	    isML := false;
-		if (ex.kind == ExpressionKind.METHODCALL) {
-    		sig := ex.method;
-    		
-    		for(i := 0; i < len(methods) ; i++) {
-    			if(i == len(methods) - 1) 
-    				methods[i] = sig;
-    			else 
-    				methods[i] = methods[i+1];
-    		}
-    		patt := "";
-    		if(methods[0] == methods[1] && methods[1] == methods[2]) ;
-    		else {
-    			foreach(i : int; def(methods[i]))
-    			    patt += methods[i] + ", " ;
-    		}
-    		foreach(i : int; def(methods[i])) {
-    		    exists (j: int; m[j] == methods[i]) {
-		            isML = true;
-		        }
-		        if(isML) 
-		            break;
-    		}
-    		if(isML)
-    		    proj << patt weight 1;
-		}	
+	    patt := "";
+		if (ex.kind != ExpressionKind.METHODCALL)
+			stop;
+		
+		sig := ex.method;		
+		for(i := 0; i < len(methods); i++) {
+			if(i == len(methods) - 1) 
+				methods[i] = sig;
+			else 
+				methods[i] = methods[i+1];
+		}
+	
+		foreach(i : int; def(methods[i])) {
+			if(methods[i] == "") 
+				stop;
+			exists (j: int; m[j] == methods[i])
+	            isML = true;
+	        patt += methods[i] + ", " ;
+		}
+		if(isML)
+		    proj << patt weight 1;
 	}
 });
